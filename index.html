@@ -23,6 +23,10 @@
     // small value appearing after every drwing frame and make the ball moving
     let dx = 2;
     let dy = -2;
+    // define the paddle
+    let paddleHeight = 10;
+    let paddleWidth = 75;
+    let paddleX = (canvas.width-paddleWidth)/2;
 
     function drawBall(){
       ctx.beginPath();
@@ -43,7 +47,16 @@
       if(y + dy > canvas.height-ballRadius || y + dy < ballRadius){
         dy = -dy;
       }
+    };
+
+    function drawPaddle(){
+      ctx.beginPath();
+      ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+      ctx.fillStyle = "#EEFF00";
+      ctx.fill();
+      ctx.closePath();
     }
+
     setInterval(draw, 10);
 
     let ballRadius = 10;
