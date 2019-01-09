@@ -80,8 +80,14 @@
       if(x + dx > canvas.width-ballRadius || x + dx < ballRadius){
         dx = -dx;
       }
-      if(y + dy > canvas.height-ballRadius || y + dy < ballRadius){
+      // changing here the logic to make the ball boucing only on 3 walls
+      if(y + dy > ballRadius){
         dy = -dy;
+      } else if (y + dy > canvas.height-ballRadius){
+        // when ball touch the floor = alert + reload document
+        alert("GAME OVER");
+        document.location.reload();
+        clearInterval(interval);
       }
       // logic of the paddle
       if(rightPressed && paddleX < canvas.width-paddleWidth){
@@ -96,7 +102,7 @@
 
     }
 
-    setInterval(draw, 10);
+    let interval = setInterval(draw, 10);
 
     </script>
   </body>
