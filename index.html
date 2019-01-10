@@ -81,14 +81,20 @@
         dx = -dx;
       }
       // changing here the logic to make the ball boucing only on 3 walls
-      if(y + dy > ballRadius){
+      if(y + dy < ballRadius){
         dy = -dy;
       } else if (y + dy > canvas.height-ballRadius){
+        if(x > paddleX && x < paddleX + paddleWidth){
+          dy = -dy;
+        }
         // when ball touch the floor = alert + reload document
-        alert("GAME OVER");
-        document.location.reload();
-        clearInterval(interval);
+        else {
+          alert("GAME OVER");
+          document.location.reload();
+          clearInterval(interval); // only for Chrome
       }
+    }
+
       // logic of the paddle
       if(rightPressed && paddleX < canvas.width-paddleWidth){
         paddleX += 7;
