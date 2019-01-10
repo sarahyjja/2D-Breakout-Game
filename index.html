@@ -70,7 +70,7 @@
         leftPressed = false;
       }
     }
- 
+
     function collisionDetection(){
       for(let c = 0; c < brickColumnCount; c++){
         for(let r = 0; r < brickRowCount; r++){
@@ -125,6 +125,7 @@
       drawBricks();
       drawBall();
       drawPaddle();
+      collisionDetection();
 
       // logic of the ball
       if(x + dx > canvas.width-ballRadius || x + dx < ballRadius){
