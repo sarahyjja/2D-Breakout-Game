@@ -49,6 +49,8 @@
     }
     //scoring
     let score = 0;
+    //lives player
+    let lives = 3;
 
     // keydown = when the keyboard is pressed => then keyDownHandler
     // keyup = when the keyboard stop being pressed => then keyUpHandler
@@ -107,6 +109,12 @@
       ctx.fillText("Score: " + score, 8, 20); // the last two numbers are the coordinates to place the text on the canvas.
     }
 
+    function writeLives(){
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "000";
+      ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+    }
+
     function drawBall(){
       ctx.beginPath();
       ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -148,6 +156,7 @@
       drawBall();
       drawPaddle();
       writeScore();
+      writeLives();
       collisionDetection();
 
       // logic of the ball
@@ -157,18 +166,28 @@
       // changing here the logic to make the ball boucing only on 3 walls
       if(y + dy < ballRadius){
         dy = -dy;
-      } else if (y + dy > canvas.height-ballRadius){
+      }
+      else if (y + dy > canvas.height-ballRadius){
         if(x > paddleX && x < paddleX + paddleWidth){
           dy = -dy;
         }
         // when ball touch the floor = alert + reload document
         else {
+          lives--;
+          if(!lives){
           alert("GAME OVER");
           document.location.reload();
           clearInterval(interval); // only for Chrome
+        }
+        else {
+          x = canvas.width/2;
+          y = canvas.height - 30;
+          dx = 2;
+          dy = -2;
+          paddleX = (canvas.width - paddleWidth) / 2;
+        }
       }
     }
-
       // logic of the paddle
       if(rightPressed && paddleX < canvas.width-paddleWidth){
         paddleX += 7;
@@ -179,10 +198,10 @@
 
       x += dx;
       y += dy;
-
+       requestAnimationFrame(draw);
     }
 
-    let interval = setInterval(draw, 10);
+    draw();
 
     </script>
   </body>
