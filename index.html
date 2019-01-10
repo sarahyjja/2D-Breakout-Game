@@ -39,7 +39,7 @@
     let brickPadding = 10;
     let brickOffsetTop = 30;
     let brickOffsetLeft = 30;
-    //logic to create the bricks 
+    //logic to create the bricks
     let bricks = [];
     for(let c = 0; c < brickColumnCount; c++){
       bricks[c] = [];
@@ -85,6 +85,23 @@
       ctx.fillStyle = "#0095DD";
       ctx.fill();
       ctx.closePath();
+    }
+    
+// Bricks drawing logic
+    function drawBricks(){
+      for(let c = 0; c < brickColumnCount; c++){
+        for(let r = 0; r < brickRowCount; r++){
+          let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+          let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+          bricks[c][r].x = brickX;
+          bricks[c][r].y = brickY;
+          ctx.beginPath();
+          ctx.rect(brickX, brickY, brickWidth, brickHeight);
+          ctx.fillStyle = "#FFAA00";
+          ctx.fill();
+          ctx.closePath();
+        }
+      }
     }
 
     function draw(){
