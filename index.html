@@ -47,6 +47,8 @@
         bricks[c][r] = {x:0, y: 0, status: 1};
       }
     }
+    //scoring
+    let score = 0;
 
     // keydown = when the keyboard is pressed => then keyDownHandler
     // keyup = when the keyboard stop being pressed => then keyUpHandler
@@ -79,10 +81,17 @@
             if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight){
               dy = -dy;
               b.status = 0;
+              score++;
             }
           }
         }
       }
+    }
+
+    function writeScore(){
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "000"
+      ctx.fillText("Score: " + score, 8, 20); // the last two numbers are the coordinates to place the text on the canvas.
     }
 
     function drawBall(){
@@ -125,6 +134,7 @@
       drawBricks();
       drawBall();
       drawPaddle();
+      writeScore(); 
       collisionDetection();
 
       // logic of the ball
