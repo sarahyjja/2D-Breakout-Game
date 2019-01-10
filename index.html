@@ -82,6 +82,11 @@
               dy = -dy;
               b.status = 0;
               score++;
+              if(score == brickRowCount * brickColumnCount){
+                alert("YOU WIN BABE!");
+                document.location.reload();
+                clearInterval(interval); //again jsut for Chrome
+              }
             }
           }
         }
@@ -134,7 +139,7 @@
       drawBricks();
       drawBall();
       drawPaddle();
-      writeScore(); 
+      writeScore();
       collisionDetection();
 
       // logic of the ball
